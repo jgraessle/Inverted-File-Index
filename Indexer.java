@@ -1,11 +1,13 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.BufferedWriter;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Indexer {
-    //rizz that code up code boy
     public HashMap<String, ArrayList<Integer>> Indexify() { 
         String string = ReadIn();
         string = Simplify(string);
@@ -66,9 +68,18 @@ public class Indexer {
         }
         return data;
     }
+    public void printOut(HashMap<String, ArrayList<Integer>> hashMap) {
+        String hashString = "" + hashMap;
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Jerome'sIndexerOutput.txt"))) {
+            writer.write(hashString);
+        } 
+        catch (IOException e) {
+            System.out.println("Error writing to output file");
+        }
+    }
 
 public static void main(String[] args) {
     Indexer indexer = new Indexer();
-    System.out.println(indexer.Indexify());
+    indexer.printOut(indexer.Indexify());
 }
 }
